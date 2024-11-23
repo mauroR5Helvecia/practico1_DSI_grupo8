@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "clientes_potenciales")
-public class ClientePotencial {
+public class ClientePotencialG8 {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,14 +17,14 @@ public class ClientePotencial {
 
     private String telefono;
 
-    public ClientePotencial(Long idClientePotencial, String nombre, String email, String telefono) {
+    public ClientePotencialG8(Long idClientePotencial, String nombre, String email, String telefono) {
         this.idClientePotencial = idClientePotencial;
         this.nombre = nombre;
         this.email = email;
         this.telefono = telefono;
     }
 
-    public ClientePotencial(){
+    public ClientePotencialG8(){
 
     }
 
@@ -58,5 +58,16 @@ public class ClientePotencial {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Se guardo el cliente POtencial con" +
+                "idClientePotencial=" + idClientePotencial +
+                ", nombre='" + nombre + '\'' +
+                ", email='" + email + '\'' +
+                ", telefono='" + telefono + '\'' +
+                '}';
     }
 }
