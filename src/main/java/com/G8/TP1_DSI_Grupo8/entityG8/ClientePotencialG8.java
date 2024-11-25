@@ -1,6 +1,9 @@
-package com.G8.TP1_DSI_Grupo8.entity;
+package com.G8.TP1_DSI_Grupo8.entityG8;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "clientes_potenciales")
@@ -10,21 +13,24 @@ public class ClientePotencialG8 {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idClientePotencial;
 
-
     private String nombre;
-
+    private String apellido;
     private String email;
 
-    private String telefono;
+    @OneToMany(mappedBy = "clientePotencial", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MiembroCampaniaG8> miembrosCampania = new ArrayList<>();
 
-    public ClientePotencialG8(Long idClientePotencial, String nombre, String email, String telefono) {
+
+    public ClientePotencialG8(Long idClientePotencial, String nombre, String apellido, String email, List<MiembroCampaniaG8> miembrosCampania) {
         this.idClientePotencial = idClientePotencial;
         this.nombre = nombre;
+        this.apellido = apellido;
         this.email = email;
-        this.telefono = telefono;
+        this.miembrosCampania = miembrosCampania;
     }
 
     public ClientePotencialG8(){
+
 
     }
 
@@ -44,6 +50,14 @@ public class ClientePotencialG8 {
         this.nombre = nombre;
     }
 
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -52,22 +66,22 @@ public class ClientePotencialG8 {
         this.email = email;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public List<MiembroCampaniaG8> getMiembrosCampania() {
+        return miembrosCampania;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setMiembrosCampania(List<MiembroCampaniaG8> miembrosCampania) {
+        this.miembrosCampania = miembrosCampania;
     }
-
 
     @Override
     public String toString() {
-        return "Se guardo el cliente POtencial con" +
+        return "ClientePotencialG8{" +
                 "idClientePotencial=" + idClientePotencial +
                 ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
                 ", email='" + email + '\'' +
-                ", telefono='" + telefono + '\'' +
+                ", miembrosCampania=" + miembrosCampania +
                 '}';
     }
 }

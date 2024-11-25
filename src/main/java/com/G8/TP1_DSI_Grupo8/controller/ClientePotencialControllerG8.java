@@ -1,11 +1,9 @@
 package com.G8.TP1_DSI_Grupo8.controller;
-import com.G8.TP1_DSI_Grupo8.entity.ClientePotencialG8;
-import com.G8.TP1_DSI_Grupo8.service.clientePotencial.ClientePotencialInterfaceG8;
+import com.G8.TP1_DSI_Grupo8.entityG8.ClientePotencialG8;
+import com.G8.TP1_DSI_Grupo8.serviceG8.clientePotencialG8.ClientePotencialInterfaceG8;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 
@@ -18,7 +16,7 @@ public class ClientePotencialControllerG8 {
 
 
     @PostMapping("/save")
-    public String SaveClientePotencial (ClientePotencialG8 cliente){
+    public String SaveClientePotencial (@RequestBody ClientePotencialG8 cliente){
         try{
 
             ClientePotencialG8 clienteResponse =clientePotencialInterfaceG8.guardar(cliente);
@@ -39,4 +37,6 @@ public class ClientePotencialControllerG8 {
             throw new RuntimeException("Hubo un error al traer la lista de clientes potenciales", e);
         }
     }
+
+
 }
