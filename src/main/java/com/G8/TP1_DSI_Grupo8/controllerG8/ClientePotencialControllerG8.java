@@ -1,4 +1,5 @@
-package com.G8.TP1_DSI_Grupo8.controller;
+package com.G8.TP1_DSI_Grupo8.controllerG8;
+import com.G8.TP1_DSI_Grupo8.DTOG8.ClientePotencialDTOG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.ClientePotencialG8;
 import com.G8.TP1_DSI_Grupo8.serviceG8.clientePotencialG8.ClientePotencialInterfaceG8;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,10 @@ public class ClientePotencialControllerG8 {
 
 
     @PostMapping("/save")
-    public String SaveClientePotencial (@RequestBody ClientePotencialG8 cliente){
+    public String SaveClientePotencial (@RequestBody ClientePotencialDTOG8 cliente){
         try{
 
-            ClientePotencialG8 clienteResponse =clientePotencialInterfaceG8.guardar(cliente);
+            ClientePotencialG8 clienteResponse = clientePotencialInterfaceG8.guardar(cliente);
 
             return clienteResponse.toString();
 

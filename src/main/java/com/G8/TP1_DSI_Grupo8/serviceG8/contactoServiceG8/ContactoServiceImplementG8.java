@@ -1,7 +1,7 @@
 package com.G8.TP1_DSI_Grupo8.serviceG8.contactoServiceG8;
 
 import com.G8.TP1_DSI_Grupo8.entityG8.ContactoG8;
-import com.G8.TP1_DSI_Grupo8.repositoryG8.ContactoRepositoryG8;
+import com.G8.TP1_DSI_Grupo8.DAOG8.ContactoDAOG8;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.List;
 public class ContactoServiceImplementG8 implements ContactoServiceInterfaceG8 {
 
     @Autowired
-    private ContactoRepositoryG8 contactoRepository;
+    private ContactoDAOG8 contactoRepository;
 
     @Override
     public List<ContactoG8> obtenerTodos() {

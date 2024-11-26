@@ -102,4 +102,17 @@ public class CampaniaG8 {
     public void setMiembrosCampania(List<MiembroCampaniaG8> miembrosCampania) {
         this.miembrosCampania = miembrosCampania;
     }
+
+
+    @Override
+    public String toString() {
+        return "CampaniaG8{" +
+                "nombreCampania='" + nombreCampania + '\'' +
+                ", objetivosCampania='" + objetivosCampania + '\'' +
+                ", patrocinadorCampania='" + patrocinadorCampania + '\'' +
+                ", fechaInicioCampania=" + fechaInicioCampania +
+                ", fechaFinCampania=" + fechaFinCampania +
+                ", otrosDetallesCampania='" + otrosDetallesCampania + '\'' +
+                '}';
+    }
 }

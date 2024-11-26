@@ -3,7 +3,7 @@ package com.G8.TP1_DSI_Grupo8.serviceG8.campaniaServiceG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.CampaniaG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.ClientePotencialG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.MiembroCampaniaG8;
-import com.G8.TP1_DSI_Grupo8.repositoryG8.CampaniaRepositoryG8;
+import com.G8.TP1_DSI_Grupo8.DAOG8.CampaniaDAOG8;
 import com.G8.TP1_DSI_Grupo8.serviceG8.clientePotencialG8.ClientePotencialServiceImplementG8;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.Optional;
 public class CampaniaServiceInrterfaceG8 implements CampaniaServiceInterfaceG8{
 
     @Autowired
-    private CampaniaRepositoryG8 campaniaRepository;
+    private CampaniaDAOG8 campaniaRepository;
 
     @Autowired
     private ClientePotencialServiceImplementG8 clientePotencialServiceImplementG8;

@@ -17,21 +17,43 @@ public class ClientePotencialG8 {
     private String apellido;
     private String email;
 
+    @ManyToOne
+    @JoinColumn(name = "campania_id", nullable = true)
+    private CampaniaG8 campania;
+
+
     @OneToMany(mappedBy = "clientePotencial", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MiembroCampaniaG8> miembrosCampania = new ArrayList<>();
 
 
-    public ClientePotencialG8(Long idClientePotencial, String nombre, String apellido, String email, List<MiembroCampaniaG8> miembrosCampania) {
+
+    public ClientePotencialG8(Long idClientePotencial, String nombre, String apellido, String email) {
         this.idClientePotencial = idClientePotencial;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
-        this.miembrosCampania = miembrosCampania;
+
     }
 
     public ClientePotencialG8(){
 
 
+    }
+
+    public CampaniaG8 getCampania() {
+        return campania;
+    }
+
+    public void setCampania(CampaniaG8 campania) {
+        this.campania = campania;
+    }
+
+    public List<MiembroCampaniaG8> getMiembrosCampania() {
+        return miembrosCampania;
+    }
+
+    public void setMiembrosCampania(List<MiembroCampaniaG8> miembrosCampania) {
+        this.miembrosCampania = miembrosCampania;
     }
 
     public Long getIdClientePotencial() {
@@ -66,13 +88,7 @@ public class ClientePotencialG8 {
         this.email = email;
     }
 
-    public List<MiembroCampaniaG8> getMiembrosCampania() {
-        return miembrosCampania;
-    }
 
-    public void setMiembrosCampania(List<MiembroCampaniaG8> miembrosCampania) {
-        this.miembrosCampania = miembrosCampania;
-    }
 
     @Override
     public String toString() {
@@ -80,8 +96,6 @@ public class ClientePotencialG8 {
                 "idClientePotencial=" + idClientePotencial +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
-                ", email='" + email + '\'' +
-                ", miembrosCampania=" + miembrosCampania +
-                '}';
+                ", email='" + email + '\'';
     }
 }

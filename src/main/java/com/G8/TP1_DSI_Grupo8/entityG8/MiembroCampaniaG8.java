@@ -11,11 +11,11 @@ public class MiembroCampaniaG8 {
     private Long idMiembroCampania;
 
     @ManyToOne
-    @JoinColumn(name = "idCampania", nullable = false)
+    @JoinColumn(name = "campania_id", nullable = true)
     private CampaniaG8 campania;
 
     @ManyToOne
-    @JoinColumn(name = "idClientePotencial", nullable = false)
+    @JoinColumn(name = "idClientePotencial", nullable = true)
     private ClientePotencialG8 clientePotencial;
 
     @ManyToOne

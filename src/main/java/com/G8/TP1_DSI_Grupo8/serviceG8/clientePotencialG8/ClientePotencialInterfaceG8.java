@@ -1,5 +1,6 @@
 package com.G8.TP1_DSI_Grupo8.serviceG8.clientePotencialG8;
 
+import com.G8.TP1_DSI_Grupo8.DTOG8.ClientePotencialDTOG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.ClientePotencialG8;
 
 import java.util.List;
@@ -11,5 +12,5 @@ public interface ClientePotencialInterfaceG8 {
 
     public List<ClientePotencialG8> obtenerTodos();
 
-    public ClientePotencialG8 guardar(ClientePotencialG8 clientePotencial);
+    public ClientePotencialG8 guardar(ClientePotencialDTOG8 clientePotencial);
 }

@@ -2,9 +2,9 @@ package com.G8.TP1_DSI_Grupo8.serviceG8.cuentaService;
 import com.G8.TP1_DSI_Grupo8.entityG8.ContactoG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.ContratoG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.CuentaG8;
-import com.G8.TP1_DSI_Grupo8.repositoryG8.ContactoRepositoryG8;
-import com.G8.TP1_DSI_Grupo8.repositoryG8.ContratoRepositoryG8;
-import com.G8.TP1_DSI_Grupo8.repositoryG8.CuentaRepositoryG8;
+import com.G8.TP1_DSI_Grupo8.DAOG8.ContactoDAOG8;
+import com.G8.TP1_DSI_Grupo8.DAOG8.ContratoDAOG8;
+import com.G8.TP1_DSI_Grupo8.DAOG8.CuentaDAOG8;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -13,13 +13,13 @@ import java.util.List;
 public class CuentaServiceImplementG8 implements CuentaServiceInterfaceG8 {
 
     @Autowired
-    private CuentaRepositoryG8 cuentaRepository;
+    private CuentaDAOG8 cuentaRepository;
 
     @Autowired
-    private ContratoRepositoryG8 contratoRepositoryG8;
+    private ContratoDAOG8 contratoRepositoryG8;
 
     @Autowired
-    private ContactoRepositoryG8 contactoRepositoryG8;
+    private ContactoDAOG8 contactoRepositoryG8;
 
     @Override
     public List<CuentaG8> obtenerTodas() {

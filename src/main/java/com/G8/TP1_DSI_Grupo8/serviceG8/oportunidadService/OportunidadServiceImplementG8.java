@@ -3,7 +3,7 @@ package com.G8.TP1_DSI_Grupo8.serviceG8.oportunidadService;
 import com.G8.TP1_DSI_Grupo8.entityG8.ContactoG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.OportunidadG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.RolOportunidadG8;
-import com.G8.TP1_DSI_Grupo8.repositoryG8.OportunidadRepositoryG8;
+import com.G8.TP1_DSI_Grupo8.DAOG8.OportunidadDAOG8;
 import com.G8.TP1_DSI_Grupo8.serviceG8.contactoServiceG8.ContactoServiceImplementG8;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.List;
 public class OportunidadServiceImplementG8 implements OportunidadServiceInterfaceG8 {
 
     @Autowired
-    private OportunidadRepositoryG8 oportunidadRepository;
+    private OportunidadDAOG8 oportunidadRepository;
 
     @Autowired
     private ContactoServiceImplementG8 contactoServiceImplementG8;

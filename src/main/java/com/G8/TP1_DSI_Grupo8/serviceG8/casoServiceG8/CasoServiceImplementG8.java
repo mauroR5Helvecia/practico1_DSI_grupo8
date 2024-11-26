@@ -2,7 +2,7 @@ package com.G8.TP1_DSI_Grupo8.serviceG8.casoServiceG8;
 
 import com.G8.TP1_DSI_Grupo8.entityG8.CasoG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.ContactoG8;
-import com.G8.TP1_DSI_Grupo8.repositoryG8.CasoRepositoryG8;
+import com.G8.TP1_DSI_Grupo8.DAOG8.CasoDAOG8;
 import com.G8.TP1_DSI_Grupo8.serviceG8.contactoServiceG8.ContactoServiceImplementG8;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.List;
 public class CasoServiceImplementG8 implements CasoServiceInterfaceG8 {
 
     @Autowired
-    private CasoRepositoryG8 casoRepository;
+    private CasoDAOG8 casoRepository;
 
     @Autowired
     private ContactoServiceImplementG8 contactoServiceImplementG8;

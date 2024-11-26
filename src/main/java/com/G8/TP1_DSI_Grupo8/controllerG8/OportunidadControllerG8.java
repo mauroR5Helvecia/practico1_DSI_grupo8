@@ -1,4 +1,4 @@
-package com.G8.TP1_DSI_Grupo8.controller;
+package com.G8.TP1_DSI_Grupo8.controllerG8;
 
 import com.G8.TP1_DSI_Grupo8.entityG8.OportunidadG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.RolOportunidadG8;

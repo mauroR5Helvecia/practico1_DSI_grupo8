@@ -1,4 +1,4 @@
-package com.G8.TP1_DSI_Grupo8.controller;
+package com.G8.TP1_DSI_Grupo8.controllerG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.ContactoG8;
 import com.G8.TP1_DSI_Grupo8.serviceG8.contactoServiceG8.ContactoServiceInterfaceG8;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,10 +1,8 @@
-package com.G8.TP1_DSI_Grupo8.controller;
+package com.G8.TP1_DSI_Grupo8.controllerG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.CampaniaG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.MiembroCampaniaG8;
-import com.G8.TP1_DSI_Grupo8.serviceG8.campaniaServiceG8.CampaniaServiceInrterfaceG8;
 import com.G8.TP1_DSI_Grupo8.serviceG8.campaniaServiceG8.CampaniaServiceInterfaceG8;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -22,7 +20,7 @@ public class CampaniaControllerG8 {
     public String saveCampania(@RequestBody CampaniaG8 campania) {
         try {
             CampaniaG8 campaniaResponse = campaniaInterfaceG8.guardar(campania);
-            return campaniaResponse.toString();
+            return "Se creo la Campania: "+campaniaResponse.toString();
         } catch (RuntimeException e) {
             throw new RuntimeException("Hubo un error al guardar la campania", e);
         }
