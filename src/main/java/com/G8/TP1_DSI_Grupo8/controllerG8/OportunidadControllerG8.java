@@ -1,5 +1,6 @@
 package com.G8.TP1_DSI_Grupo8.controllerG8;
 
+import com.G8.TP1_DSI_Grupo8.DTOG8.OportunidadDTOG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.OportunidadG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.RolOportunidadG8;
 import com.G8.TP1_DSI_Grupo8.serviceG8.oportunidadService.OportunidadServiceInterfaceG8;
@@ -55,13 +56,12 @@ public class OportunidadControllerG8 {
 
 
 
-    @PostMapping("/crearoportunidad")
+    @PostMapping("/crear")
     public ResponseEntity<OportunidadG8> crearOportunidad(
-            @RequestParam Long idCuenta,
-            @RequestParam String etapa,
-            @RequestParam String detalles) {
+            @RequestBody OportunidadDTOG8 oportunidadDTOG8
+            ) {
         try {
-            OportunidadG8 oportunidad = oportunidadService.crearOportunidad(idCuenta, etapa, detalles);
+            OportunidadG8 oportunidad = oportunidadService.crearOportunidad(oportunidadDTOG8);
             return ResponseEntity.ok(oportunidad);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

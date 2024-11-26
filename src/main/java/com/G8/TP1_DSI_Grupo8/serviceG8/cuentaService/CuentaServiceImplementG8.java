@@ -1,4 +1,7 @@
 package com.G8.TP1_DSI_Grupo8.serviceG8.cuentaService;
+import com.G8.TP1_DSI_Grupo8.DAOG8.ClientePotencialDAOG8;
+import com.G8.TP1_DSI_Grupo8.DTOG8.CrearCuentaDTOG8;
+import com.G8.TP1_DSI_Grupo8.entityG8.ClientePotencialG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.ContactoG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.ContratoG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.CuentaG8;
@@ -8,6 +11,7 @@ import com.G8.TP1_DSI_Grupo8.DAOG8.CuentaDAOG8;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CuentaServiceImplementG8 implements CuentaServiceInterfaceG8 {
@@ -20,6 +24,9 @@ public class CuentaServiceImplementG8 implements CuentaServiceInterfaceG8 {
 
     @Autowired
     private ContactoDAOG8 contactoRepositoryG8;
+
+    @Autowired
+    private ClientePotencialDAOG8 clientePotencialDAOG8;
 
     @Override
     public List<CuentaG8> obtenerTodas() {
@@ -56,34 +63,39 @@ public class CuentaServiceImplementG8 implements CuentaServiceInterfaceG8 {
 
 
     @Override
-    public CuentaG8 crearCuentaDesdeClientePotencial(Long idCliente, CuentaG8 cuenta) {
+    public CuentaG8 crearCuentaDesdeClientePotencial(CrearCuentaDTOG8 cuentaDTO) {
         try {
-            // Crear cuenta
-            CuentaG8 cuentaNueva = new CuentaG8();
-            cuentaNueva.setNombreCuenta(cuenta.getNombreCuenta());
-            cuentaNueva.setDescripcionCuenta(cuenta.getDescripcionCuenta());
-            cuentaNueva.setTelefonoCuenta(cuenta.getTelefonoCuenta());
-            cuentaNueva.setDireccionFacturacion(cuenta.getDireccionFacturacion());
+            // Obtener el cliente potencial
+            Optional<ClientePotencialG8> cliente = clientePotencialDAOG8.findById(cuentaDTO.getIdCliente());
+
+            // Crear la cuenta
+            CuentaG8 cuenta = new CuentaG8();
+            cuenta.setNombreCuenta(cuentaDTO.getNombreCuenta());
+            cuenta.setDescripcionCuenta(cuentaDTO.getDescripcionCuenta());
+            cuenta.setTelefonoCuenta(cuentaDTO.getTelefonoCuenta());
+            cuenta.setDireccionFacturacion(cuentaDTO.getDireccionFacturacion());
 
 
-            // Guardar la cuenta
             cuenta = cuentaRepository.save(cuenta);
 
-            // Crear contrato
+            // Crear el contrato asociado
             ContratoG8 contrato = new ContratoG8();
             contrato.setCuenta(cuenta);
+            contrato.setAprobacionContrato("Aprobado");
+            contrato.setEstadoContrato("Activo");
             contratoRepositoryG8.save(contrato);
 
-            // Crear contacto
+            // Crear el contacto como titular de la cuenta
             ContactoG8 contacto = new ContactoG8();
             contacto.setCuenta(cuenta);
-            contacto.setDireccionContacto("Por definir");
-            contacto.setDetallesContacto("Titular");
+            contacto.setDireccionContacto(cuenta.getDireccionFacturacion());
+            contacto.setDetallesContacto(cuentaDTO.getTelefonoCuenta());
             contactoRepositoryG8.save(contacto);
 
             return cuenta;
         } catch (RuntimeException e) {
-            throw new RuntimeException("Error al crear cuenta desde cliente potencial", e);
+            throw new RuntimeException("Error al crear la cuenta desde cliente potencial", e);
         }
     }
+
 }

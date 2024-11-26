@@ -1,5 +1,6 @@
 package com.G8.TP1_DSI_Grupo8.controllerG8;
 
+import com.G8.TP1_DSI_Grupo8.DTOG8.RegistrarCasoDTOG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.CasoG8;
 import com.G8.TP1_DSI_Grupo8.serviceG8.casoServiceG8.CasoServiceInterfaceG8;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +28,14 @@ public class CasoControllerG8 {
     }
 
     @PostMapping("/registrar")
-    public ResponseEntity<CasoG8> registrarCaso(
-            @RequestParam Long idContacto
-          ) {
+    public ResponseEntity<String> registrarCaso(@RequestBody RegistrarCasoDTOG8 dto) {
         try {
-            CasoG8 caso = casoService.registrarCaso(idContacto);
-            return ResponseEntity.ok(caso);
+            CasoG8 caso = casoService.registrarCaso(dto.getIdContacto());
+            return ResponseEntity.ok("Se ha creado un caso, pronto sera contactado para recibir asesoramiento");
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(null);
+                    .body("error al registrar el caso");
         }
     }
+
 }

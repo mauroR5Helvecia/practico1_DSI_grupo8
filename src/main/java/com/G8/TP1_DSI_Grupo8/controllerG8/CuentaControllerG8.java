@@ -1,5 +1,6 @@
 package com.G8.TP1_DSI_Grupo8.controllerG8;
 
+import com.G8.TP1_DSI_Grupo8.DTOG8.CrearCuentaDTOG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.CuentaG8;
 import com.G8.TP1_DSI_Grupo8.serviceG8.cuentaService.CuentaServiceInterfaceG8;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,10 +46,9 @@ public class CuentaControllerG8 {
 
     @PostMapping("/crear-desde-cliente")
     public ResponseEntity<CuentaG8> crearCuentaDesdeClientePotencial(
-            @RequestParam Long idCliente,
-            @RequestBody CuentaG8 cuenta) {
+            @RequestBody CrearCuentaDTOG8 cuenta) {
         try {
-            CuentaG8 cuentaCreada = cuentaService.crearCuentaDesdeClientePotencial(idCliente, cuenta);
+            CuentaG8 cuentaCreada = cuentaService.crearCuentaDesdeClientePotencial(cuenta);
             return ResponseEntity.ok(cuentaCreada);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
