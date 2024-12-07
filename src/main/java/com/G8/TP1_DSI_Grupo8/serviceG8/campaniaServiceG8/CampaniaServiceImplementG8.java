@@ -1,5 +1,6 @@
 package com.G8.TP1_DSI_Grupo8.serviceG8.campaniaServiceG8;
 
+import com.G8.TP1_DSI_Grupo8.DAOG8.ClientePotencialDAOG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.CampaniaG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.ClientePotencialG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.MiembroCampaniaG8;
@@ -12,13 +13,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CampaniaServiceInrterfaceG8 implements CampaniaServiceInterfaceG8{
+public class CampaniaServiceImplementG8 implements CampaniaServiceInterfaceG8{
 
     @Autowired
     private CampaniaDAOG8 campaniaRepository;
 
     @Autowired
     private ClientePotencialServiceImplementG8 clientePotencialServiceImplementG8;
+
 
 
     @Override
@@ -89,6 +91,13 @@ public class CampaniaServiceInrterfaceG8 implements CampaniaServiceInterfaceG8{
         }
     }
 
+    @Override
+    public List<CampaniaG8> findByNombreCampaniaContainingIgnoreCase(String nombreCampania) {
+        try{return campaniaRepository.findByNombreCampaniaContainingIgnoreCase(nombreCampania);
+        }catch (RuntimeException e){
+            throw new RuntimeException("Error al buscar lista de campanias por nombre campania", e);
+        }
+    }
 
 
 }

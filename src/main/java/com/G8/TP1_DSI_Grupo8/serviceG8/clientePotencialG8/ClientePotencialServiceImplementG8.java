@@ -1,11 +1,12 @@
 package com.G8.TP1_DSI_Grupo8.serviceG8.clientePotencialG8;
 
-import com.G8.TP1_DSI_Grupo8.DAOG8.CampaniaDAOG8;
 import com.G8.TP1_DSI_Grupo8.DTOG8.ClientePotencialDTOG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.CampaniaG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.ClientePotencialG8;
 import com.G8.TP1_DSI_Grupo8.DAOG8.ClientePotencialDAOG8;
+import com.G8.TP1_DSI_Grupo8.serviceG8.campaniaServiceG8.CampaniaServiceImplementG8;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +20,8 @@ public class ClientePotencialServiceImplementG8 implements ClientePotencialInter
     private ClientePotencialDAOG8 clientePotencialRepository;
 
     @Autowired
-    private CampaniaDAOG8 campaniaDAOG8;
+    @Lazy
+    private CampaniaServiceImplementG8 campaniaServiceImplementG8;
 
 
     @Override
@@ -53,7 +55,7 @@ public class ClientePotencialServiceImplementG8 implements ClientePotencialInter
 
 
             if (clientePotencialDTO.getNombreCampania() != null && !clientePotencialDTO.getNombreCampania().isEmpty()) {
-                CampaniaG8 campania = campaniaDAOG8.findByNombreCampaniaContainingIgnoreCase(clientePotencialDTO.getNombreCampania())
+                CampaniaG8 campania = campaniaServiceImplementG8.findByNombreCampaniaContainingIgnoreCase(clientePotencialDTO.getNombreCampania())
                         .stream()
                         .findFirst() // Tomar la primera campaña encontrada
                         .orElseThrow(() -> new RuntimeException("Campaña no encontrada con el nombre: " + clientePotencialDTO.getNombreCampania()));

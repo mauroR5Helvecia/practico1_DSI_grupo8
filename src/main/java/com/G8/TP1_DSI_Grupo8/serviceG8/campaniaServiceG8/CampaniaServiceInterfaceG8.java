@@ -18,4 +18,5 @@ public interface CampaniaServiceInterfaceG8 {
 
     public MiembroCampaniaG8 asociarClienteACampania(Long idCampania, Long idCliente);
 
+    List<CampaniaG8> findByNombreCampaniaContainingIgnoreCase(String nombreCampania);
 }

@@ -1,13 +1,13 @@
 package com.G8.TP1_DSI_Grupo8.serviceG8.cuentaService;
-import com.G8.TP1_DSI_Grupo8.DAOG8.ClientePotencialDAOG8;
 import com.G8.TP1_DSI_Grupo8.DTOG8.CrearCuentaDTOG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.ClientePotencialG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.ContactoG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.ContratoG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.CuentaG8;
-import com.G8.TP1_DSI_Grupo8.DAOG8.ContactoDAOG8;
-import com.G8.TP1_DSI_Grupo8.DAOG8.ContratoDAOG8;
 import com.G8.TP1_DSI_Grupo8.DAOG8.CuentaDAOG8;
+import com.G8.TP1_DSI_Grupo8.serviceG8.ContratoService.ContratoServiceImplement;
+import com.G8.TP1_DSI_Grupo8.serviceG8.clientePotencialG8.ClientePotencialServiceImplementG8;
+import com.G8.TP1_DSI_Grupo8.serviceG8.contactoServiceG8.ContactoServiceImplementG8;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -20,13 +20,13 @@ public class CuentaServiceImplementG8 implements CuentaServiceInterfaceG8 {
     private CuentaDAOG8 cuentaRepository;
 
     @Autowired
-    private ContratoDAOG8 contratoRepositoryG8;
+    private ContratoServiceImplement contratoService;
 
     @Autowired
-    private ContactoDAOG8 contactoRepositoryG8;
+    private ContactoServiceImplementG8 contactoServiceImplementG8;
 
     @Autowired
-    private ClientePotencialDAOG8 clientePotencialDAOG8;
+    private ClientePotencialServiceImplementG8 clientePotencialServiceImplementG8;
 
     @Override
     public List<CuentaG8> obtenerTodas() {
@@ -66,7 +66,7 @@ public class CuentaServiceImplementG8 implements CuentaServiceInterfaceG8 {
     public CuentaG8 crearCuentaDesdeClientePotencial(CrearCuentaDTOG8 cuentaDTO) {
         try {
             // Obtener el cliente potencial
-            Optional<ClientePotencialG8> cliente = clientePotencialDAOG8.findById(cuentaDTO.getIdCliente());
+            Optional<ClientePotencialG8> cliente = clientePotencialServiceImplementG8.findById(cuentaDTO.getIdCliente());
 
             // Crear la cuenta
             CuentaG8 cuenta = new CuentaG8();
@@ -83,19 +83,24 @@ public class CuentaServiceImplementG8 implements CuentaServiceInterfaceG8 {
             contrato.setCuenta(cuenta);
             contrato.setAprobacionContrato("Aprobado");
             contrato.setEstadoContrato("Activo");
-            contratoRepositoryG8.save(contrato);
+            contratoService.guardar(contrato);
 
             // Crear el contacto como titular de la cuenta
             ContactoG8 contacto = new ContactoG8();
             contacto.setCuenta(cuenta);
             contacto.setDireccionContacto(cuenta.getDireccionFacturacion());
             contacto.setDetallesContacto(cuentaDTO.getTelefonoCuenta());
-            contactoRepositoryG8.save(contacto);
+            contactoServiceImplementG8.guardar(contacto);
 
             return cuenta;
         } catch (RuntimeException e) {
             throw new RuntimeException("Error al crear la cuenta desde cliente potencial", e);
         }
+    }
+
+    @Override
+    public Optional<CuentaG8> findById(Long idCuenta) {
+        return cuentaRepository.findById(idCuenta);
     }
 
 }

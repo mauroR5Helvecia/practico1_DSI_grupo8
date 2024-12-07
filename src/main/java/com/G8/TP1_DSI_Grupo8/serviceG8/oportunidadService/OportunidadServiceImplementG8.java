@@ -8,6 +8,7 @@ import com.G8.TP1_DSI_Grupo8.entityG8.OportunidadG8;
 import com.G8.TP1_DSI_Grupo8.entityG8.RolOportunidadG8;
 import com.G8.TP1_DSI_Grupo8.DAOG8.OportunidadDAOG8;
 import com.G8.TP1_DSI_Grupo8.serviceG8.contactoServiceG8.ContactoServiceImplementG8;
+import com.G8.TP1_DSI_Grupo8.serviceG8.cuentaService.CuentaServiceImplementG8;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class OportunidadServiceImplementG8 implements OportunidadServiceInterfac
     private ContactoServiceImplementG8 contactoServiceImplementG8;
 
     @Autowired
-    private CuentaDAOG8 cuentaDAOG8;
+    private CuentaServiceImplementG8 cuentaServiceImplementG8;
 
     @Override
     public List<OportunidadG8> obtenerTodas() {
@@ -71,7 +72,7 @@ public class OportunidadServiceImplementG8 implements OportunidadServiceInterfac
     public OportunidadG8 crearOportunidad(OportunidadDTOG8 dto) {
         try {
             // Buscar la cuenta asociada
-            CuentaG8 cuenta = cuentaDAOG8.findById(dto.getIdCuenta())
+            CuentaG8 cuenta = cuentaServiceImplementG8.findById(dto.getIdCuenta())
                     .orElseThrow(() -> new RuntimeException("Cuenta no encontrada"));
 
             // Crear y configurar la oportunidad
